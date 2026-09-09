@@ -1,36 +1,34 @@
-import { Hero } from './components/Hero';
+import React from 'react';
+import { Sparkles, Code2, Rocket } from 'lucide-react';
 
-function App() {
+export default function App() {
   return (
-    <div className="min-h-screen bg-dark-900">
-      <nav className="border-b border-white/5 p-6">
-        <div className="container mx-auto flex justify-between items-center">
-          <span className="text-2xl font-bold text-white tracking-tighter">Nexus<span className="text-brand-500">UI</span></span>
-          <div className="flex gap-8 text-sm font-medium text-slate-400">
-            <a href="#" className="hover:text-white transition-colors">Produtos</a>
-            <a href="#" className="hover:text-white transition-colors">Soluções</a>
-            <a href="#" className="hover:text-white transition-colors">Preços</a>
+    <div className="flex flex-col items-center justify-center min-h-screen px-4">
+      <div className="max-w-lg w-full bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl text-center space-y-6">
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+          <Sparkles className="w-8 h-8" />
+        </div>
+
+        <div className="space-y-2">
+          <h1 className="text-3xl font-bold text-white tracking-tight">
+            Olá! Como posso ajudar hoje?
+          </h1>
+          <p className="text-slate-400 text-sm">
+            O ambiente com React, TypeScript e Tailwind CSS está pronto. O que você gostaria de construir?
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3 pt-2">
+          <div className="flex items-center gap-2 p-3 bg-slate-800/50 rounded-xl border border-slate-700/50 text-left text-xs text-slate-300">
+            <Code2 className="w-5 h-5 text-indigo-400 flex-shrink-0" />
+            <span>Dashboard, Landing Page ou Ferramenta Web</span>
+          </div>
+          <div className="flex items-center gap-2 p-3 bg-slate-800/50 rounded-xl border border-slate-700/50 text-left text-xs text-slate-300">
+            <Rocket className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+            <span>Componentes UI rápidos e interativos</span>
           </div>
         </div>
-      </nav>
-
-      <Hero />
-
-      <section className="container mx-auto px-6 pb-20">
-        <div className="grid md:grid-cols-3 gap-6">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="glass-card p-8">
-              <div className="w-12 h-12 bg-brand-500/20 rounded-lg mb-6 flex items-center justify-center text-brand-400">
-                ★
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-3">Performance Otimizada</h3>
-              <p className="text-slate-400">Arquitetura pensada para velocidade máxima e escalabilidade infinita.</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      </div>
     </div>
   );
 }
-
-export default App;
