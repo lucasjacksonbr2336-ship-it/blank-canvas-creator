@@ -11,7 +11,8 @@ for (let i = 0; i < 256; i++) {
 function crc32(bytes: Uint8Array): number {
   let crc = 0xffffffff;
   for (let i = 0; i < bytes.length; i++) {
-    crc = crcTable[(crc ^ bytes[i]) & 0xff] ^ (crc >>> 8);
+    const idx = (crc ^ (bytes[i] ?? 0)) & 0xff;
+    crc = (crcTable[idx] ?? 0) ^ (crc >>> 8);
   }
   return (crc ^ 0xffffffff) >>> 0;
 }
