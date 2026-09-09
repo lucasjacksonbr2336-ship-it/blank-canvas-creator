@@ -90,7 +90,8 @@ function createZip(files: ZipEntry[]): Blob {
   }
   chunks.push(...centralRecords, eocd);
 
-  return new Blob(chunks, { type: "application/zip" });
+  const blobParts = chunks.map((c) => c.slice().buffer as ArrayBuffer);
+  return new Blob(blobParts, { type: "application/zip" });
 }
 
 export function generateExtensionZip(): Blob {
