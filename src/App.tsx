@@ -1,31 +1,34 @@
-import React from 'react';
-import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 
 function App() {
   return (
-    <div className="min-h-screen selection:bg-primary-100 selection:text-primary-900">
-      <Navbar />
-      <main>
-        <Hero />
-        
-        {/* Seção de Prova Social / Logos */}
-        <section className="py-12 border-y border-slate-100 bg-white/50">
-          <div className="max-w-7xl mx-auto px-4 text-center">
-            <p className="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-8">Confiado por empresas inovadoras</p>
-            <div className="flex flex-wrap justify-center gap-12 opacity-40 grayscale">
-              {['Vercel', 'Stripe', 'Airbnb', 'Linear', 'Slack'].map((brand) => (
-                <span key={brand} className="text-2xl font-bold text-slate-900">{brand}</span>
-              ))}
-            </div>
+    <div className="min-h-screen bg-dark-900">
+      <nav className="border-b border-white/5 p-6">
+        <div className="container mx-auto flex justify-between items-center">
+          <span className="text-2xl font-bold text-white tracking-tighter">Nexus<span className="text-brand-500">UI</span></span>
+          <div className="flex gap-8 text-sm font-medium text-slate-400">
+            <a href="#" className="hover:text-white transition-colors">Produtos</a>
+            <a href="#" className="hover:text-white transition-colors">Soluções</a>
+            <a href="#" className="hover:text-white transition-colors">Preços</a>
           </div>
-        </section>
+        </div>
+      </nav>
 
-        {/* Footer Simples */}
-        <footer className="py-12 text-center text-slate-500 text-sm">
-          <p>© 2024 NexusUI. Todos os direitos reservados.</p>
-        </footer>
-      </main>
+      <Hero />
+
+      <section className="container mx-auto px-6 pb-20">
+        <div className="grid md:grid-cols-3 gap-6">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="glass-card p-8">
+              <div className="w-12 h-12 bg-brand-500/20 rounded-lg mb-6 flex items-center justify-center text-brand-400">
+                ★
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-3">Performance Otimizada</h3>
+              <p className="text-slate-400">Arquitetura pensada para velocidade máxima e escalabilidade infinita.</p>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
