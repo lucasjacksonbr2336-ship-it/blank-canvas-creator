@@ -1,5 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
+import { Download } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -17,7 +18,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-6 bg-background p-6">
+    <main className="flex min-h-screen flex-col items-center justify-center gap-8 bg-background p-6">
       <div className="flex flex-wrap items-center justify-center gap-4">
         <Button>Default</Button>
         <Button variant="secondary">Secondary</Button>
@@ -25,6 +26,14 @@ function Index() {
         <Button variant="gradient">Gradient</Button>
         <Button variant="ghost">Ghost</Button>
       </div>
+
+      <Button variant="outline" asChild>
+        <Link to="/download">
+          <Download className="h-4 w-4" />
+          Download extension
+        </Link>
+      </Button>
+
       <p className="text-sm text-muted-foreground">Passe o mouse e clique nos botões para ver os efeitos.</p>
     </main>
   );
