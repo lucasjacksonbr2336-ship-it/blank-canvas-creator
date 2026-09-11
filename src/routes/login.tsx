@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { createFileRoute, Link, redirect } from "@tanstack/react-router";
-import { User } from "@/types/auth";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { getUserByCode, setCurrentUser } from "@/utils/storage";
 import { KeyRound, ArrowRight, UserPlus } from "lucide-react";
 
@@ -15,6 +14,7 @@ export const Route = createFileRoute("/login")({
 });
 
 function LoginPage() {
+  const navigate = useNavigate();
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
 
@@ -35,7 +35,7 @@ function LoginPage() {
     }
 
     setCurrentUser(user);
-    throw redirect({ to: "/dashboard" });
+    void navigate({ to: "/dashboard" });
   };
 
   return (
