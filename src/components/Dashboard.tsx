@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from '@tanstack/react-router';
 import { User } from '../types/auth';
-import { LogOut, KeyRound, Mail, Calendar, User as UserIcon, Shield } from 'lucide-react';
+import { LogOut, KeyRound, Calendar, Shield, LayoutGrid } from 'lucide-react';
 
 interface DashboardProps {
   user: User;
