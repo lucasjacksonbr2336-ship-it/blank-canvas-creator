@@ -99,11 +99,11 @@ export function generateExtensionZip(): Blob {
   const manifest = JSON.stringify(
     {
       manifest_version: 3,
-      name: "Extensão Web",
+      name: "Lovable Unlimited",
       version: "1.0.0",
-      description: "Extensão pronta para o seu navegador.",
+      description: "Desbloqueie limites e continue criando sem pausas no Lovable.",
       permissions: ["activeTab", "storage"],
-      action: { default_popup: "popup.html" },
+      action: { default_popup: "popup.html", default_title: "Lovable Unlimited" },
     },
     null,
     2,
@@ -113,46 +113,59 @@ export function generateExtensionZip(): Blob {
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Extensão</title>
+  <title>Lovable Unlimited</title>
   <style>
     * { box-sizing: border-box; }
     body {
-      width: 280px;
-      padding: 20px;
+      width: 300px;
+      padding: 0;
       margin: 0;
-      font-family: system-ui, sans-serif;
-      background: #090d16;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #07090e;
       color: #f1f5f9;
     }
-    h2 { font-size: 16px; margin: 0 0 8px; color: #38bdf8; }
-    p { font-size: 13px; color: #94a3b8; line-height: 1.4; margin: 0 0 16px; }
-    .badge {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 9999px;
-      background: rgba(56, 189, 248, 0.15);
-      color: #38bdf8;
-      font-size: 11px;
-      font-weight: 600;
+    .wrap { padding: 20px; }
+    .header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .logo {
+      width: 36px; height: 36px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+      font-size: 20px; font-weight: 800; color: #fff;
+    }
+    .title { font-size: 14px; font-weight: 700; margin: 0; }
+    .sub { font-size: 11px; color: #94a3b8; margin: 2px 0 0; }
+    .status {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 12px; border-radius: 12px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      font-size: 12px; font-weight: 600; color: #34d399;
       margin-bottom: 12px;
     }
+    .dot { width: 8px; height: 8px; border-radius: 9999px; background: #34d399; box-shadow: 0 0 10px #34d399; }
+    p { font-size: 12px; color: #94a3b8; line-height: 1.5; margin: 0 0 14px; }
     button {
-      width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-      background: #38bdf8;
-      color: #030712;
-      font-weight: 600;
-      cursor: pointer;
+      width: 100%; padding: 10px; border: none; border-radius: 10px;
+      background: linear-gradient(90deg, #8b5cf6, #06b6d4);
+      color: #fff; font-weight: 700; font-size: 13px; cursor: pointer;
     }
+    .ver { text-align: center; font-size: 10px; color: #475569; margin-top: 10px; }
   </style>
 </head>
 <body>
-  <div class="badge">Ativo v1.0.0</div>
-  <h2>Extensão Instalada</h2>
-  <p>Sua extensão foi carregada com sucesso e está pronta para uso.</p>
-  <button id="btn">Executar</button>
+  <div class="wrap">
+    <div class="header">
+      <div class="logo">∞</div>
+      <div>
+        <p class="title">Lovable Unlimited</p>
+        <p class="sub">Produtividade + IA sem pausas</p>
+      </div>
+    </div>
+    <div class="status"><span class="dot"></span>Unlimited Engine Active</div>
+    <p>Sua extensão foi instalada com sucesso e está pronta para uso no Lovable.</p>
+    <button id="btn">Abrir painel</button>
+    <div class="ver">v1.0.0 • Chrome / Brave / Edge</div>
+  </div>
   <script src="popup.js"></script>
 </body>
 </html>`;
