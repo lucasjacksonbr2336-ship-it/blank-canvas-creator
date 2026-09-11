@@ -25,13 +25,22 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
               <p className="text-indigo-100 text-sm">{user.email}</p>
             </div>
           </div>
-          <button
-            onClick={onLogout}
-            className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-sm font-medium backdrop-blur-md transition-all flex items-center gap-2 border border-white/20 shadow-sm"
-          >
-            <LogOut className="w-4 h-4" />
-            Sair
-          </button>
+          <div className="flex items-center gap-2">
+            <Link
+              to="/canvas"
+              className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-sm font-medium backdrop-blur-md transition-all flex items-center gap-2 border border-white/20 shadow-sm"
+            >
+              <LayoutGrid className="w-4 h-4" />
+              Abrir Canvas
+            </Link>
+            <button
+              onClick={onLogout}
+              className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-sm font-medium backdrop-blur-md transition-all flex items-center gap-2 border border-white/20 shadow-sm"
+            >
+              <LogOut className="w-4 h-4" />
+              Sair
+            </button>
+          </div>
         </div>
       </div>
 
