@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap");
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
@@ -139,4 +140,100 @@
   background-size: 200% 200%;
   animation: gradient-x 6s ease infinite;
 }
+
+@theme {
+  --font-editorial: "Fraunces", "Georgia", serif;
+  --font-sans-ed: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: var(--font-sans-ed);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: #1c1917;
+    color: #fafaf9;
+  }
+}
+
+.font-editorial {
+  font-family: var(--font-editorial);
+  letter-spacing: -0.02em;
+}
+
+/* ——— entrance ——— */
+@keyframes ed-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes ed-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes ed-drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes ed-line {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.ed-enter { opacity: 0; animation: ed-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.ed-enter-1 { animation-delay: 0.05s; }
+.ed-enter-2 { animation-delay: 0.18s; }
+.ed-enter-3 { animation-delay: 0.32s; }
+.ed-enter-4 { animation-delay: 0.46s; }
+.ed-enter-5 { animation-delay: 0.6s; }
+.ed-fade-late { opacity: 0; animation: ed-fade 1.2s ease 0.7s forwards; }
+.ed-drift { animation: ed-drift 7s ease-in-out infinite; }
+
+/* ——— scroll reveal ——— */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ——— editorial links & buttons ——— */
+.ed-link {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s;
+  padding-bottom: 2px;
+}
+.ed-link:hover { background-size: 0% 1px; }
+.btn-ink {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.25s, box-shadow 0.35s;
+}
+.btn-ink:hover { transform: translateY(-1px); box-shadow: 0 12px 28px -14px rgba(28, 25, 23, 0.5); }
+.btn-ink:active { transform: translateY(0); }
+.row-hover { transition: background-color 0.3s, padding-left 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
+.row-hover:hover { background-color: #fafaf9; }
+.row-hover:hover .row-arrow { transform: translateX(4px); }
+.row-arrow { transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
+.ad-frame { transition: border-color 0.4s, box-shadow 0.5s; }
+.ad-frame:hover { border-color: #d6d3d1; box-shadow: 0 24px 60px -40px rgba(28, 25, 23, 0.25); }
+.ad-frame:hover .ad-visual { transform: translateY(-4px) rotate(-0.5deg); }
+.ad-visual { transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ed-enter, .ed-fade-late { animation: none; opacity: 1; }
+  .reveal { transition: none; opacity: 1; transform: none; }
+  .ed-drift { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
 
