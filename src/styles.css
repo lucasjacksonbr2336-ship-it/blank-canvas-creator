@@ -229,10 +229,44 @@
 .ad-frame:hover .ad-visual { transform: translateY(-4px) rotate(-0.5deg); }
 .ad-visual { transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
 
+/* ——— LIVELY UPGRADE ——— */
+@keyframes marquee-x { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes blob-a { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(30px,-24px) scale(1.08); } 66% { transform: translate(-22px,18px) scale(0.96); } }
+@keyframes blob-b { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-34px,-18px) scale(1.12); } }
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+@keyframes shine-sweep { 0% { transform: translateX(-120%) skewX(-18deg); } 100% { transform: translateX(240%) skewX(-18deg); } }
+@keyframes ping-dot { 0% { transform: scale(1); opacity: .9; } 80%,100% { transform: scale(2.6); opacity: 0; } }
+@keyframes grad-pan { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes float-y { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes bar-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@keyframes pop-in { 0% { opacity: 0; transform: scale(.92) translateY(10px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes border-spin { to { --angle: 360deg; } }
+@property --angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+
+.anim-marquee { animation: marquee-x 22s linear infinite; }
+.anim-blob-a { animation: blob-a 11s ease-in-out infinite; }
+.anim-blob-b { animation: blob-b 13s ease-in-out infinite; }
+.anim-float-y { animation: float-y 5s ease-in-out infinite; }
+.anim-spin-slow { animation: spin-slow 14s linear infinite; }
+.grad-text { background: linear-gradient(100deg,#1c1917 20%,#a8a29e 40%,#1c1917 60%); background-size: 220% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: grad-pan 6s ease infinite; }
+.grad-text-warm { background: linear-gradient(100deg,#f59e0b,#f43f5e,#8b5cf6,#f59e0b); background-size: 250% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: grad-pan 7s ease infinite; }
+.btn-shine { position: relative; overflow: hidden; isolation: isolate; }
+.btn-shine::after { content: ""; position: absolute; top: 0; bottom: 0; width: 45%; background: linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent); transform: translateX(-120%) skewX(-18deg); animation: shine-sweep 3.2s ease-in-out infinite; }
+.live-dot { position: relative; }
+.live-dot::after { content: ""; position: absolute; inset: 0; border-radius: 9999px; background: #16a34a; animation: ping-dot 1.8s cubic-bezier(0,0,.2,1) infinite; }
+.card-lift { transition: transform .5s cubic-bezier(.22,1,.36,1), box-shadow .5s, border-color .4s; }
+.card-lift:hover { transform: translateY(-6px); box-shadow: 0 30px 60px -30px rgba(28,25,23,.28); border-color: #d6d3d1; }
+.pro-glow { position: relative; }
+.pro-glow::before { content: ""; position: absolute; inset: -1.5px; border-radius: 26px; padding: 1.5px; background: conic-gradient(from var(--angle),#f59e0b,#f43f5e,#8b5cf6,#22c55e,#f59e0b); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: border-spin 5s linear infinite; pointer-events: none; }
+.pop-in { animation: pop-in .5s cubic-bezier(.22,1,.36,1) both; }
+.bar-shimmer { background-image: linear-gradient(100deg,rgba(255,255,255,0) 40%,rgba(255,255,255,.55) 50%,rgba(255,255,255,0) 60%); background-size: 200% 100%; animation: bar-shimmer 1.6s linear infinite; }
+
 @media (prefers-reduced-motion: reduce) {
   .ed-enter, .ed-fade-late { animation: none; opacity: 1; }
   .reveal { transition: none; opacity: 1; transform: none; }
   .ed-drift { animation: none; }
+  .anim-marquee, .anim-blob-a, .anim-blob-b, .anim-float-y, .anim-spin-slow, .btn-shine::after, .grad-text, .grad-text-warm { animation: none !important; }
+  .pro-glow::before { animation: none; }
   html { scroll-behavior: auto; }
 }
 

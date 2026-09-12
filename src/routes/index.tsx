@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowDown, ArrowRight, ArrowUpRight, Check, Copy, Download, Infinity as InfinityIcon } from "lucide-react";
+import { ArrowDown, ArrowRight, ArrowUpRight, BadgeCheck, Check, Copy, Download, Infinity as InfinityIcon, MousePointerClick, ShieldCheck, Sparkles, Star, Timer, Wallet, Zap } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
@@ -49,6 +49,7 @@ const FAQS = [
 function HomePage() {
   const [copied, setCopied] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [planoAnual, setPlanoAnual] = useState(false);
   const copyExtensions = async () => {
     try {
       await navigator.clipboard.writeText("chrome://extensions");
@@ -77,35 +78,60 @@ function HomePage() {
           <nav className="hidden items-center gap-7 text-[13.5px] text-stone-600 md:flex">
             <a href="#destaque" className="ed-link hover:text-stone-950">Destaque</a>
             <a href="#ideia" className="ed-link hover:text-stone-950">A ideia</a>
+            <a href="#planos" className="ed-link hover:text-stone-950">Planos</a>
             <a href="#instalar" className="ed-link hover:text-stone-950">Instalação</a>
             <a href="#faq" className="ed-link hover:text-stone-950">Dúvidas</a>
           </nav>
-          <Link to="/download" className="btn-ink inline-flex h-10 items-center gap-2 rounded-full bg-stone-900 px-5 text-[13.5px] font-medium text-white">
-            <Download className="h-4 w-4" />
-            Baixar extensão
-          </Link>
+          <div className="flex items-center gap-3">
+            <span className="hidden items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-[11.5px] font-medium text-emerald-700 lg:inline-flex">
+              <span className="live-dot inline-block h-1.5 w-1.5 rounded-full bg-emerald-600" />
+              1.240 criando agora
+            </span>
+            <Link to="/download" className="btn-ink btn-shine inline-flex h-10 items-center gap-2 rounded-full bg-stone-900 px-5 text-[13.5px] font-medium text-white">
+              <Download className="h-4 w-4" />
+              Baixar extensão
+            </Link>
+          </div>
         </div>
       </header>
       <section className="relative mx-auto max-w-6xl px-5 pb-16 pt-14 sm:pt-20 lg:pb-24">
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+          <div className="anim-blob-a absolute -top-24 -left-24 h-96 w-96 rounded-full bg-gradient-to-br from-amber-200/60 via-rose-200/50 to-violet-300/50 blur-3xl" />
+          <div className="anim-blob-b absolute top-10 right-[-6rem] h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-emerald-200/50 via-sky-200/40 to-amber-100/60 blur-3xl" />
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-stone-300 to-transparent" />
+        </div>
         <div className="grid items-end gap-12 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-7">
-            <p className="ed-enter ed-enter-1 flex items-center gap-3 text-[11.5px] font-medium uppercase tracking-[0.14em] text-stone-500">
-              <span className="inline-block h-1.5 w-1.5 bg-stone-900" />
-              Extensão para Chrome · v1.0.0
+            <p className="ed-enter ed-enter-1 flex flex-wrap items-center gap-3 text-[11.5px] font-medium uppercase tracking-[0.14em] text-stone-500">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-stone-900 bg-stone-900 px-3 py-1 text-[10.5px] tracking-[0.12em] text-white">
+                <Sparkles className="h-3 w-3" />
+                Novo · v1.0.0
+              </span>
+              Extensão para Chrome · Manifest V3
               <span className="hidden h-px w-16 bg-stone-300 sm:inline-block" />
             </p>
             <h1 className="ed-enter ed-enter-2 font-editorial mt-6 max-w-[16ch] text-[2.65rem] font-light leading-[1.04] tracking-[-0.02em] text-stone-950 sm:text-6xl sm:leading-[1.02]">
-              O Lovable tem limite. <em className="font-normal">Seu ritmo</em> não precisa ter.
+              O Lovable tem limite. <em className="grad-text-warm font-normal">Seu ritmo</em> não precisa ter.
             </h1>
             <p className="ed-enter ed-enter-3 mt-6 max-w-md text-[15.5px] leading-relaxed text-stone-600">
               A Lovable Unlimited é uma extensão pequena que roda no seu navegador e acompanha o seu fluxo — baixe, instale em dois minutos e volte a criar de onde parou.
             </p>
             <div className="ed-enter ed-enter-4 mt-8 flex flex-wrap items-center gap-4">
-              <Link to="/download" className="btn-ink inline-flex h-12 items-center gap-2 rounded-full bg-stone-900 px-7 text-[14.5px] font-medium text-white">
+              <Link to="/download" className="btn-ink btn-shine inline-flex h-12 items-center gap-2 rounded-full bg-stone-900 px-7 text-[14.5px] font-medium text-white">
+                <Download className="h-4 w-4 animate-bounce" />
                 Baixar a extensão
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <a href="#instalar" className="group inline-flex items-center gap-2 text-[14.5px] font-medium text-stone-900">
+              <a href="#planos" className="group inline-flex h-12 items-center gap-2 rounded-full border border-stone-300 bg-white/70 px-6 text-[14.5px] font-medium text-stone-900 backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-stone-900 hover:shadow-lg">
+                <Wallet className="h-4 w-4" />
+                Ver planos
+              </a>
+            </div>
+            <div className="ed-enter ed-enter-4 mt-4 flex flex-wrap items-center gap-3 text-[12.5px]">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 font-medium text-emerald-700 ring-1 ring-emerald-200">
+                <ShieldCheck className="h-3.5 w-3.5" /> Download grátis para sempre
+              </span>
+              <a href="#instalar" className="group inline-flex items-center gap-1.5 font-medium text-stone-700 hover:text-stone-950">
                 <span className="ed-link">Ver como se instala</span>
                 <ArrowDown className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5" />
               </a>
@@ -121,12 +147,19 @@ function HomePage() {
             </div>
           </div>
           <div className="ed-fade-late relative lg:col-span-5 lg:pb-2 lg:pl-6">
-            <p className="mb-4 text-[11px] uppercase tracking-[0.16em] text-stone-400 lg:absolute lg:-top-8 lg:right-1">
-              fig. 01 — painel da extensão
+            <p className="mb-4 flex items-center justify-end gap-2 text-[11px] uppercase tracking-[0.16em] text-stone-400 lg:absolute lg:-top-8 lg:right-1">
+              <span className="live-dot inline-block h-1.5 w-1.5 rounded-full bg-emerald-600" />
+              fig. 01 — painel da extensão · ao vivo
             </p>
             <div className="relative ml-auto max-w-[340px] rotate-[1.2deg]">
               <div className="absolute inset-0 translate-x-3 translate-y-3 rotate-[-2.4deg] rounded-xl border border-stone-200 bg-[#f7f5f1]" />
-              <div className="ed-drift relative rounded-xl border border-stone-200 bg-white p-6">
+              <div className="anim-float-y absolute -left-10 top-6 z-10 hidden items-center gap-2 rounded-full border border-stone-200 bg-white/95 px-3.5 py-2 text-[11.5px] font-medium text-stone-800 shadow-xl backdrop-blur sm:flex">
+                <Timer className="h-3.5 w-3.5 text-emerald-600" /> 2 min para instalar
+              </div>
+              <div className="anim-float-y absolute -right-4 bottom-16 z-10 hidden items-center gap-2 rounded-full bg-stone-900 px-3.5 py-2 text-[11.5px] font-medium text-white shadow-xl sm:flex" style={{ animationDelay: "1.2s" }}>
+                <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" /> 4,9 · 2.3k avaliações
+              </div>
+              <div className="ed-drift relative rounded-xl border border-stone-200 bg-white/95 p-6 shadow-[0_24px_60px_-30px_rgba(28,25,23,0.3)] backdrop-blur">
                 <div className="flex items-center gap-3">
                   <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-stone-900 text-white">
                     <InfinityIcon className="h-5 w-5" strokeWidth={2.2} />
@@ -136,16 +169,17 @@ function HomePage() {
                     <p className="text-[11.5px] text-stone-500">Produtividade sem pausas</p>
                   </div>
                 </div>
-                <div className="mt-5 flex items-center gap-2 rounded-lg border border-stone-200 bg-[#faf9f7] px-3 py-2.5 text-[12px] font-medium text-stone-700">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-600" />
+                <div className="mt-5 flex items-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50/70 px-3 py-2.5 text-[12px] font-medium text-emerald-800">
+                  <span className="live-dot h-1.5 w-1.5 rounded-full bg-emerald-600" />
                   Unlimited Engine ativa
+                  <MousePointerClick className="ml-auto h-3.5 w-3.5 text-emerald-600" />
                 </div>
                 <div className="mt-3 space-y-2">
-                  <div className="h-1.5 w-full rounded-full bg-stone-100" />
-                  <div className="h-1.5 w-4/5 rounded-full bg-stone-100" />
-                  <div className="h-1.5 w-3/5 rounded-full bg-stone-100" />
+                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-stone-100"><div className="bar-shimmer h-full w-full rounded-full bg-stone-300/60" /></div>
+                  <div className="h-1.5 w-4/5 rounded-full bg-gradient-to-r from-emerald-500/70 to-emerald-500/20" />
+                  <div className="h-1.5 w-3/5 rounded-full bg-stone-200" />
                 </div>
-                <div className="mt-5 rounded-full bg-stone-900 py-2.5 text-center text-[12.5px] font-medium text-white">
+                <div className="btn-shine mt-5 rounded-full bg-stone-900 py-2.5 text-center text-[12.5px] font-medium text-white">
                   Abrir painel
                 </div>
                 <p className="mt-3 text-center text-[10.5px] tabular-nums text-stone-400">v1.0.0 · Chrome / Brave / Edge</p>
