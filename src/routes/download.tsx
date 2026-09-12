@@ -11,7 +11,6 @@ import {
   KeyRound,
   X,
 } from "lucide-react";
-import { triggerExtensionDownload } from "@/lib/extension-package";
 
 export const Route = createFileRoute("/download")({
   component: DownloadPage,
@@ -26,6 +25,8 @@ export const Route = createFileRoute("/download")({
     ],
   }),
 });
+
+const MEDIAFIRE_DOWNLOAD_URL = "https://www.mediafire.com/file/gvqlcl3in83w7ag/Lovable+Unlimited.rar/file";
 
 const FAQS = [
   { q: "O download é grátis?", a: "Sim. O download do .zip é gratuito. A chave ilimitada é liberada na assinatura de R$ 4/sem, mas você pode instalar e conhecer a interface sem pagar nada." },
@@ -80,9 +81,7 @@ function DownloadPage() {
       setProgress(pct);
       if (pct < 100) setTimeout(tick, 60);
       else {
-        try {
-          triggerExtensionDownload("lovable-unlimited-v1.0.0.zip");
-        } catch { /* noop */ }
+        window.open(MEDIAFIRE_DOWNLOAD_URL, "_blank", "noopener,noreferrer");
         setDownloaded(true);
         setDownloading(false);
       }
@@ -174,13 +173,13 @@ function DownloadPage() {
           <p className="tabular-nums">v1.0.0 · PT-BR</p>
         </div>
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-          <Link to="/" className="flex items-center gap-2.5">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-stone-900 text-white">
-              <InfinityIcon className="h-5 w-5" />
+          <Link to="/" className="group flex items-center gap-2.5">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-stone-900 text-white transition-transform duration-300 group-hover:-rotate-6">
+              <InfinityIcon className="h-4 w-4" strokeWidth={2.2} />
             </span>
-            <span className="leading-tight">
+            <span className="leading-none">
               <span className="block text-[15px] font-semibold tracking-tight">Unlimited</span>
-              <span className="block text-[11.5px] text-stone-500">Lovable · PT-BR</span>
+              <span className="mt-0.5 block text-[11px] text-stone-500">para o Lovable</span>
             </span>
           </Link>
           <nav className="hidden items-center gap-7 text-[13.5px] text-stone-600 md:flex">
@@ -219,7 +218,7 @@ function DownloadPage() {
               <div className="ed-enter ed-enter-4 mt-8 flex flex-wrap items-center gap-4">
                 <button onClick={handleDownload} disabled={downloading} className="btn-ink inline-flex h-12 items-center gap-2 rounded-full bg-stone-900 px-7 text-[14.5px] font-medium text-white disabled:opacity-70">
                   <Download className="h-4 w-4" />
-                  {downloading ? `Baixando ${progress}%` : downloaded ? "Baixar novamente (.zip)" : "Baixar a extensão"}
+                  {downloading ? `Baixando ${progress}%` : downloaded ? "Baixar novamente" : "Baixar a extensão"}
                   {!downloading && <ArrowRight className="h-4 w-4" />}
                 </button>
                 <a href="#tutorial" className="group inline-flex items-center gap-2 text-[14.5px] font-medium text-stone-900">
