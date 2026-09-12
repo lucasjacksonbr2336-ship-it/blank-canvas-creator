@@ -26,7 +26,7 @@ export const Route = createFileRoute("/download")({
   }),
 });
 
-const MEDIAFIRE_DOWNLOAD_URL = "https://www.mediafire.com/file/gvqlcl3in83w7ag/Lovable+Unlimited.rar/file";
+const MEDIAFIRE_DOWNLOAD_URL = "https://www.mediafire.com/file/gvqlcl3in83w7ag/Lovable_Unlimited.rar/file";
 
 const FAQS = [
   { q: "O download é grátis?", a: "Sim. O download do .zip é gratuito. A chave ilimitada é liberada na assinatura de R$ 4/sem, mas você pode instalar e conhecer a interface sem pagar nada." },
