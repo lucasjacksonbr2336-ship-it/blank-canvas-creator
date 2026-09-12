@@ -8,6 +8,8 @@ import {
   Copy,
   Download,
   Infinity as InfinityIcon,
+  KeyRound,
+  X,
 } from "lucide-react";
 import { triggerExtensionDownload } from "@/lib/extension-package";
 
@@ -65,9 +67,11 @@ function DownloadPage() {
   const [downloaded, setDownloaded] = useState(false);
   const [copied, setCopied] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [apiModalOpen, setApiModalOpen] = useState(false);
 
-  const handleDownload = () => {
+  const startDownload = () => {
     if (downloading) return;
+    setApiModalOpen(false);
     setDownloading(true);
     setProgress(0);
     const startedAt = Date.now();
@@ -86,6 +90,16 @@ function DownloadPage() {
     tick();
   };
 
+  const handleDownload = () => {
+    if (downloading) return;
+    setApiModalOpen(true);
+  };
+
+  const handleContinueConfiguration = () => {
+    window.location.hash = "tutorial";
+    startDownload();
+  };
+
   const copyUrl = async () => {
     try {
       await navigator.clipboard.writeText("chrome://extensions");
@@ -94,8 +108,66 @@ function DownloadPage() {
     } catch { setCopied(false); }
   };
 
+  useEffect(() => {
+    if (!apiModalOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setApiModalOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [apiModalOpen]);
+
   return (
     <main className="min-h-screen w-full overflow-x-clip bg-[#fdfdfc] text-stone-900 antialiased">
+      <div
+        className={`fixed inset-0 z-50 flex items-center justify-center px-5 transition-all duration-300 ${apiModalOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="gemini-api-modal-title"
+      >
+        <button
+          type="button"
+          aria-label="Fechar aviso sobre API Key"
+          onClick={() => setApiModalOpen(false)}
+          className="absolute inset-0 bg-stone-950/18 backdrop-blur-[6px] transition-opacity duration-300"
+        />
+        <div className={`relative w-full max-w-md overflow-hidden rounded-[2rem] border border-white/70 bg-white/72 p-6 shadow-[0_24px_70px_rgba(28,25,23,0.18)] backdrop-blur-2xl transition-all duration-300 ease-out sm:p-7 ${apiModalOpen ? "translate-y-0 scale-100 opacity-100" : "translate-y-3 scale-[0.98] opacity-0"}`}>
+          <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white to-transparent" />
+          <div className="flex items-start justify-between gap-5">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-stone-200/80 bg-white/70 text-stone-900 shadow-sm">
+              <KeyRound className="h-5 w-5" />
+            </div>
+            <button
+              type="button"
+              onClick={() => setApiModalOpen(false)}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-stone-200/80 bg-white/55 text-stone-500 transition-all duration-300 hover:border-stone-300 hover:bg-white hover:text-stone-900 active:scale-95"
+              aria-label="Fechar modal"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+          <p className="mt-7 text-[11px] font-medium uppercase tracking-[0.16em] text-stone-500">Configuração necessária</p>
+          <h2 id="gemini-api-modal-title" className="font-editorial mt-3 text-3xl font-light leading-[1.08] text-stone-950 sm:text-[2.15rem]">
+            Antes de baixar, configure sua <em className="font-normal">API Key da Gemini.</em>
+          </h2>
+          <p className="mt-4 text-[14.5px] leading-relaxed text-stone-600">
+            Para utilizar o recurso de download corretamente, será necessário informar uma API Key da Gemini no fluxo de configuração. Nenhuma chave real é exibida ou solicitada aqui.
+          </p>
+          <div className="mt-6 rounded-2xl border border-stone-200/80 bg-white/45 px-4 py-3 text-[12.5px] leading-relaxed text-stone-600">
+            A chave permite que o recurso funcione de forma completa após a instalação da extensão.
+          </div>
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <button onClick={handleContinueConfiguration} className="btn-ink inline-flex h-11 items-center justify-center gap-2 rounded-full bg-stone-900 px-6 text-[14px] font-medium text-white">
+              Continuar/configurar
+              <ArrowRight className="h-4 w-4" />
+            </button>
+            <button onClick={() => setApiModalOpen(false)} className="inline-flex h-11 items-center justify-center rounded-full border border-stone-200 bg-white/60 px-6 text-[14px] font-medium text-stone-700 transition-all duration-300 hover:border-stone-900 hover:text-stone-950 active:scale-[0.98]">
+              Fechar aviso
+            </button>
+          </div>
+        </div>
+      </div>
+
       <header className="sticky top-0 z-40 border-b border-stone-200/80 bg-[#fdfdfc]/90 backdrop-blur-md">
         <div className="mx-auto hidden max-w-6xl items-center justify-between px-5 pt-2 text-[11px] tracking-wide text-stone-500 sm:flex">
           <p className="uppercase">Lovable Unlimited — página de download</p>
