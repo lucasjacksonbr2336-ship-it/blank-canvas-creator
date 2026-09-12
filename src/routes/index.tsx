@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowDown, ArrowRight, ArrowUpRight, BadgeCheck, Check, Copy, Download, Infinity as InfinityIcon, MousePointerClick, ShieldCheck, Sparkles, Star, Timer, Wallet, Zap } from "lucide-react";
+import { ArrowDown, ArrowRight, ArrowUpRight, BadgeCheck, Check, Copy, Download, Infinity as InfinityIcon, Menu, MousePointerClick, ShieldCheck, Sparkles, Star, Timer, Wallet, X, Zap } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
@@ -50,6 +50,7 @@ function HomePage() {
   const [copied, setCopied] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [planoAnual, setPlanoAnual] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const copyExtensions = async () => {
     try {
       await navigator.clipboard.writeText("chrome://extensions");
@@ -82,17 +83,35 @@ function HomePage() {
             <a href="#instalar" className="ed-link hover:text-stone-950">Instalação</a>
             <a href="#faq" className="ed-link hover:text-stone-950">Dúvidas</a>
           </nav>
-          <div className="flex items-center gap-3">
-            <span className="hidden items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-[11.5px] font-medium text-emerald-700 lg:inline-flex">
-              <span className="live-dot inline-block h-1.5 w-1.5 rounded-full bg-emerald-600" />
-              1.240 criando agora
+          <div className="flex items-center gap-2 sm:gap-3">
+            <span className="hidden items-center gap-1.5 rounded-full border border-stone-200 bg-stone-100 px-3 py-1.5 text-[11.5px] font-medium text-stone-600 lg:inline-flex">
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-600" />
+              Novo · v1.0.0
             </span>
-            <Link to="/download" className="btn-ink btn-shine inline-flex h-10 items-center gap-2 rounded-full bg-stone-900 px-5 text-[13.5px] font-medium text-white">
+            <Link to="/download" className="btn-ink btn-shine hidden h-10 items-center gap-2 rounded-full bg-stone-900 px-5 text-[13.5px] font-medium text-white sm:inline-flex">
               <Download className="h-4 w-4" />
               Baixar extensão
             </Link>
+            <button onClick={() => setMenuOpen((v) => !v)} aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} className="flex h-10 w-10 items-center justify-center rounded-full border border-stone-200 text-stone-700 md:hidden">
+              {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
         </div>
+          {menuOpen && (
+            <nav className="border-t border-stone-200/80 px-5 py-3 md:hidden">
+              <div className="flex flex-col gap-1 text-[14px]">
+                <a href="#destaque" onClick={() => setMenuOpen(false)} className="rounded-lg px-2 py-2.5 text-stone-700 hover:bg-stone-100">Destaque</a>
+                <a href="#ideia" onClick={() => setMenuOpen(false)} className="rounded-lg px-2 py-2.5 text-stone-700 hover:bg-stone-100">A ideia</a>
+                <a href="#planos" onClick={() => setMenuOpen(false)} className="rounded-lg px-2 py-2.5 text-stone-700 hover:bg-stone-100">Planos</a>
+                <a href="#instalar" onClick={() => setMenuOpen(false)} className="rounded-lg px-2 py-2.5 text-stone-700 hover:bg-stone-100">Instalação</a>
+                <a href="#faq" onClick={() => setMenuOpen(false)} className="rounded-lg px-2 py-2.5 text-stone-700 hover:bg-stone-100">Dúvidas</a>
+                <Link to="/download" onClick={() => setMenuOpen(false)} className="mt-1 inline-flex h-11 items-center justify-center gap-2 rounded-full bg-stone-900 px-5 text-[14px] font-medium text-white">
+                  <Download className="h-4 w-4" />
+                  Baixar grátis
+                </Link>
+              </div>
+            </nav>
+          )}
       </header>
       <section className="relative mx-auto max-w-6xl px-5 pb-16 pt-14 sm:pt-20 lg:pb-24">
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
@@ -142,7 +161,8 @@ function HomePage() {
               <span>Chrome · Brave · Edge</span>
               <span className="hidden h-3 w-px bg-stone-300 sm:inline-block" />
               <span className="inline-flex items-center gap-1.5">
-                <span className="tracking-tight text-stone-900">★★★★★</span> 4,9 — 2.3k avaliações
+                <ShieldCheck className="h-3.5 w-3.5 text-emerald-600" />
+                Pacote auditável · 3 arquivos
               </span>
             </div>
           </div>
