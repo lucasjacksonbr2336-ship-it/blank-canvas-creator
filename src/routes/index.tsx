@@ -339,12 +339,93 @@ function HomePage() {
           </Reveal>
         </div>
       </section>
+      <section id="planos" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-20 lg:py-28">
+        <div className="grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <Reveal>
+              <div className="lg:sticky lg:top-28">
+                <p className="text-[11.5px] font-medium uppercase tracking-[0.16em] text-stone-500">02 — Planos</p>
+                <h2 className="font-editorial mt-4 max-w-[14ch] text-3xl font-light leading-[1.12] text-stone-950 sm:text-4xl">
+                  Um preço pequeno, sem pausa.
+                </h2>
+                <p className="mt-4 max-w-xs text-[14px] leading-relaxed text-stone-600">
+                  O download é grátis. A ativação ilimitada custa R$ 4 por semana — cancele quando quiser.
+                </p>
+                <div className="mt-6 inline-flex items-center rounded-full border border-stone-200 bg-white p-1 text-[13px] font-medium">
+                  <button
+                    type="button"
+                    onClick={() => setPlanoAnual(false)}
+                    aria-pressed={!planoAnual}
+                    className={`rounded-full px-4 py-1.5 transition-colors duration-300 ${!planoAnual ? "bg-stone-900 text-white" : "text-stone-500 hover:text-stone-900"}`}
+                  >
+                    Semanal
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setPlanoAnual(true)}
+                    aria-pressed={planoAnual}
+                    className={`rounded-full px-4 py-1.5 transition-colors duration-300 ${planoAnual ? "bg-stone-900 text-white" : "text-stone-500 hover:text-stone-900"}`}
+                  >
+                    Anual
+                  </button>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+          <div className="lg:col-span-8">
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Reveal>
+                <div className="flex h-full flex-col rounded-2xl border border-stone-200 bg-white p-7">
+                  <p className="text-[11.5px] font-medium uppercase tracking-[0.16em] text-stone-500">Download</p>
+                  <p className="font-editorial mt-4 text-4xl font-light text-stone-950">R$ 0</p>
+                  <p className="mt-2 text-[13.5px] leading-relaxed text-stone-600">Baixe, instale e conheça a interface sem pagar nada.</p>
+                  <ul className="mt-6 space-y-2.5 text-[13.5px] text-stone-700">
+                    <li className="flex items-start gap-2.5"><Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-700" />Pacote .zip de ~48 KB</li>
+                    <li className="flex items-start gap-2.5"><Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-700" />Instalação em 2 minutos</li>
+                    <li className="flex items-start gap-2.5"><Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-700" />Sem conta, sem checkout</li>
+                  </ul>
+                  <Link to="/download" className="mt-7 inline-flex h-11 items-center justify-center gap-2 rounded-full border border-stone-300 bg-white px-6 text-[13.5px] font-medium text-stone-900 transition-all duration-300 hover:border-stone-900">
+                    Baixar grátis
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </Reveal>
+              <Reveal delay={100}>
+                <div className="relative flex h-full flex-col rounded-2xl border border-stone-900 bg-stone-950 p-7 text-white">
+                  <p className="text-[11.5px] font-medium uppercase tracking-[0.16em] text-stone-400">Ilimitado</p>
+                  <p className="font-editorial mt-4 text-4xl font-light tabular-nums">
+                    {planoAnual ? "R$ 208" : "R$ 4"}
+                    <span className="ml-2 align-middle font-sans text-[13px] font-normal text-stone-400">{planoAnual ? "/ano" : "/sem"}</span>
+                  </p>
+                  <p className="mt-2 text-[13.5px] leading-relaxed text-stone-300">
+                    {planoAnual ? "O mesmo R$ 4/sem, cobrado de uma vez — 52 semanas sem pausa." : "Uso contínuo no Lovable, sem pausas no fluxo."}
+                  </p>
+                  <ul className="mt-6 space-y-2.5 text-[13.5px] text-stone-200">
+                    <li className="flex items-start gap-2.5"><Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />Unlimited Engine ativa</li>
+                    <li className="flex items-start gap-2.5"><Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />Atualizações incluídas</li>
+                    <li className="flex items-start gap-2.5"><Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />Cancele quando quiser</li>
+                  </ul>
+                  <Link to="/download" className="btn-ink mt-7 inline-flex h-11 items-center justify-center gap-2 rounded-full bg-white px-6 text-[13.5px] font-medium text-stone-950">
+                    {planoAnual ? "Assinar o anual" : "Ativar por R$ 4/sem"}
+                    <ArrowUpRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </Reveal>
+            </div>
+            <Reveal delay={140}>
+              <p className="mt-4 text-[12px] leading-relaxed text-stone-400">
+                Preço honesto: primeiro o download grátis, depois a ativação — do mesmo jeito que o tutorial mostra.
+              </p>
+            </Reveal>
+          </div>
+        </div>
+      </section>
       <section id="instalar" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-20 lg:py-28">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <Reveal>
               <div className="lg:sticky lg:top-28">
-                <p className="text-[11.5px] font-medium uppercase tracking-[0.16em] text-stone-500">02 — Instalação</p>
+                <p className="text-[11.5px] font-medium uppercase tracking-[0.16em] text-stone-500">03 — Instalação</p>
                 <h2 className="font-editorial mt-4 max-w-[14ch] text-3xl font-light leading-[1.12] text-stone-950 sm:text-4xl">
                   Quatro gestos, nenhum manual.
                 </h2>
@@ -394,7 +475,7 @@ function HomePage() {
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 lg:grid-cols-12 lg:py-24">
           <div className="lg:col-span-5">
             <Reveal>
-              <p className="text-[11.5px] font-medium uppercase tracking-[0.16em] text-stone-500">03 — No navegador</p>
+              <p className="text-[11.5px] font-medium uppercase tracking-[0.16em] text-stone-500">04 — No navegador</p>
               <h2 className="font-editorial mt-4 text-3xl font-light leading-[1.12] text-stone-950 sm:text-4xl">
                 Discreta por <em className="font-normal">desenho.</em>
               </h2>
@@ -461,7 +542,7 @@ function HomePage() {
           <div className="lg:col-span-4">
             <Reveal>
               <div className="lg:sticky lg:top-28">
-                <p className="text-[11.5px] font-medium uppercase tracking-[0.16em] text-stone-500">04 — Dúvidas</p>
+                <p className="text-[11.5px] font-medium uppercase tracking-[0.16em] text-stone-500">05 — Dúvidas</p>
                 <h2 className="font-editorial mt-4 text-3xl font-light leading-tight text-stone-950">Perguntas de quem instala.</h2>
                 <p className="mt-4 max-w-xs text-[14px] leading-relaxed text-stone-600">
                   O restante — tutorial passo a passo e download — está na página dedicada.
